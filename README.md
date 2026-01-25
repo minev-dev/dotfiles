@@ -11,5 +11,5 @@ stow .
 ### Linux-specific
 
 ```bash
-sudo ln -s .config/keyd /etc/keyd
+sudo ln -s ~/dotfiles/.config/keyd /etc/keyd
 ```
