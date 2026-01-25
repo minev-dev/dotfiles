@@ -3,6 +3,8 @@ font-size = 18
 clipboard-read = allow
 clipboard-write = allow
 
+confirm-close-surface = false
+
 # --- CROSS-PLATFORM MACOS/LINUX SETUP ---
 
 # 1. NEW TAB
