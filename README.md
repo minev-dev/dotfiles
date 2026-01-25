@@ -10,9 +10,24 @@ stow .
 
 ### Linux-specific
 
+#### `keyd`
+
+Remapping linux key binging to mirrot MacOS
+
+##### Link config to `/etc/keyd`
+
 ```bash
 sudo ln -s ~/dotfiles/.config/keyd /etc/keyd
 ```
+
+##### Install and enable `keyd`
+
+```
+sudo apt install keyd
+sudo systemctl enable keyd --now
+```
+
+More info - https://github.com/rvaiya/keyd
 
 ## Post-installation
 
