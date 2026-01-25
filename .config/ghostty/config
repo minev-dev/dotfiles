@@ -2,3 +2,5 @@ font-family = JetBrains Mono
 font-size = 18
 clipboard-read = allow
 clipboard-write = allow
+
+keybind = alt+t=new_tab
