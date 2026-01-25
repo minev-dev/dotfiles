@@ -46,6 +46,25 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("lualine").setup {
+        sections = {
+          lualine_c = {
+            {
+              "filename",
+              path = 1,
+            },
+            {
+              "lsp_status",
+            },
+          },
+        },
+      }
+    end,
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = require "configs.gitsigns",
   },
   {
     "kdheepak/lazygit.nvim",

@@ -63,17 +63,3 @@ vim.api.nvim_create_autocmd("VimEnter", {
   desc = "Auto open NvimTree on startup",
 })
 
--- lualine
-require("lualine").setup {
-  sections = {
-    lualine_c = {
-      {
-        "filename",
-        path = 1,
-      },
-      {
-        "lsp_status",
-      },
-    },
-  },
-}
