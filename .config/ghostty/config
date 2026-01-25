@@ -4,3 +4,4 @@ clipboard-read = allow
 clipboard-write = allow
 
 keybind = alt+t=new_tab
+keybind = alt+w=close_tab
