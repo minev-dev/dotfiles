@@ -6,9 +6,15 @@ require "nvchad.mappings"
 -- General Settings
 --------------------------------------------------------------------------------
 
--- Clipboard configuration (OSC52)
-vim.g.clipboard = require("vim.ui.clipboard.osc52").tool
-vim.opt.clipboard = "unnamedplus"
+-- Automatically copy to system clipboard on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  pattern = "*",
+  callback = function()
+    if vim.v.event.operator == "y" and vim.v.event.regname == "" then
+      require("osc52").copy_register("")
+    end
+  end,
+})
 
 --------------------------------------------------------------------------------
 -- General Mappings
