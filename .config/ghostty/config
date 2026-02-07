@@ -13,7 +13,7 @@ keybind = ctrl+t=new_tab
 
 # 2. CLOSE TAB
 keybind = super+w=close_tab
-keybind = ctrl+w=close_tab
+keybind = unconsumed:ctrl+w=close_tab
 
 # 3. COPY
 keybind = super+c=copy_to_clipboard
@@ -24,7 +24,6 @@ keybind = super+v=paste_from_clipboard
 keybind = shift+insert=paste_from_clipboard
 
 # 5. TAB SWITCHING
-# macOS: Cmd+1..9
 keybind = super+1=goto_tab:1
 keybind = super+2=goto_tab:2
 keybind = super+3=goto_tab:3
@@ -32,14 +31,14 @@ keybind = super+4=goto_tab:4
 keybind = super+5=goto_tab:5
 keybind = super+6=goto_tab:6
 
-# 6. MULTILINE INPUT (Fix for Shift+Enter in CLI apps)
-keybind = shift+enter=text:\x0a
-
-# Linux: Thumb+1..9 sends Ctrl+1..9
+# Linux: Thumb+1..9 sends Ctrl+1..9 via keyd
 keybind = ctrl+1=goto_tab:1
 keybind = ctrl+2=goto_tab:2
 keybind = ctrl+3=goto_tab:3
 keybind = ctrl+4=goto_tab:4
 keybind = ctrl+5=goto_tab:5
 keybind = ctrl+6=goto_tab:6
+
+# 6. MULTILINE INPUT (Fix for Shift+Enter in CLI apps)
+keybind = shift+enter=text:\x0a
 
