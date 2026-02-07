@@ -13,7 +13,7 @@ keybind = ctrl+t=new_tab
 
 # 2. CLOSE TAB
 keybind = super+w=close_tab
-keybind = unconsumed:ctrl+w=close_tab
+keybind = ctrl+f4=close_tab
 
 # 3. COPY
 keybind = super+c=copy_to_clipboard
