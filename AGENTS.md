@@ -55,12 +55,12 @@ Stow symlinks everything from this repo into `$HOME`. File paths here mirror the
 
 ## Tooling & Standards
 
-| Category | Tool | Constraint |
-| :--- | :--- | :--- |
-| **Lua** | `stylua` | formatting (see `.config/nvim/.stylua.toml`) |
-| **Python** | `ruff`, `pyright` | formatting/linting, LSP |
-| **Git** | `lazygit` | Preferred UI within Neovim |
-| **Clipboard** | `osc52` | **CRITICAL**: Maintain for SSH/remote sessions. Never rely solely on xclip/pbcopy. |
+| Category      | Tool              | Constraint                                                                         |
+| :------------ | :---------------- | :--------------------------------------------------------------------------------- |
+| **Lua**       | `stylua`          | formatting (see `.config/nvim/.stylua.toml`)                                       |
+| **Python**    | `ruff`, `pyright` | formatting/linting, LSP                                                            |
+| **Git**       | `lazygit`         | Preferred UI within Neovim                                                         |
+| **Clipboard** | `osc52`           | **CRITICAL**: Maintain for SSH/remote sessions. Never rely solely on xclip/pbcopy. |
 
 ## Constraints
 
@@ -69,3 +69,13 @@ Stow symlinks everything from this repo into `$HOME`. File paths here mirror the
 - **Cross-platform by default**: When adding shell commands or paths, ensure they work on both Linux and macOS.
 - **Read before writing**: Always read the specific config file before making changes to understand existing overrides.
 - **Do not assume dependencies**: Do not assume external tools (like `ripgrep`, `fd`, `npm`) are installed unless verified.
+
+## Git Conventions
+
+- Before committing, review the recent commit history using an optimized command (e.g., `git log -n 5 --format="---%n%B"`) to ensure consistency with the established tone, phrasing, and level of detail while being token-efficient.
+- Follow the "commit title and description" style:
+  - The first line should be a concise summary (the "title") in present simple tense (e.g., "Fix cursor offset" not "Fixed cursor offset").
+  - Use a blank line between the title and the body.
+  - The body (the "description") should provide more detail on _why_ and _how_ in present simple tense. It is not needed when the title is self-explanatory.
+- Do not use conventional commit prefixes (e.g., `feat:`, `fix:`).
+- Do not add `Co-Authored-By` trailers or any AI attribution to commit messages.
