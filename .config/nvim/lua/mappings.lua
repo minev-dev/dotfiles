@@ -24,15 +24,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 map("n", ";", ":", { desc = "CMD enter command mode" })
 
 -- Window resizing
-map("n", "<C-w>+", "<cmd>resize +5<CR>", { desc = "Increase window height" })
-map("n", "<C-w>-", "<cmd>resize -5<CR>", { desc = "Decrease window height" })
-map("n", "<C-w>>", "<cmd>vertical resize +5<CR>", { desc = "Increase window width" })
-map("n", "<C-w><", "<cmd>vertical resize -5<CR>", { desc = "Decrease window width" })
+map("n", "<C-w>+", "<cmd>resize +10<CR>", { noremap = true, silent = true, nowait = true, desc = "Increase window height" })
+map("n", "<C-w>-", "<cmd>resize -10<CR>", { noremap = true, silent = true, nowait = true, desc = "Decrease window height" })
+map("n", "<C-w>>", "<cmd>vertical resize +10<CR>", { noremap = true, silent = true, nowait = true, desc = "Increase window width" })
+map("n", "<C-w><", "<cmd>vertical resize -10<CR>", { noremap = true, silent = true, nowait = true, desc = "Decrease window width" })
 
-map("t", "<C-w>+", "<cmd>resize +5<CR>", { desc = "Terminal increase window height" })
-map("t", "<C-w>-", "<cmd>resize -5<CR>", { desc = "Terminal decrease window height" })
-map("t", "<C-w>>", "<cmd>vertical resize +5<CR>", { desc = "Terminal increase window width" })
-map("t", "<C-w><", "<cmd>vertical resize -5<CR>", { desc = "Terminal decrease window width" })
+map("t", "<C-w>+", "<cmd>resize +10<CR>", { noremap = true, silent = true, nowait = true, desc = "Terminal increase window height" })
+map("t", "<C-w>-", "<cmd>resize -10<CR>", { noremap = true, silent = true, nowait = true, desc = "Terminal decrease window height" })
+map("t", "<C-w>>", "<cmd>vertical resize +10<CR>", { noremap = true, silent = true, nowait = true, desc = "Terminal increase window width" })
+map("t", "<C-w><", "<cmd>vertical resize -10<CR>", { noremap = true, silent = true, nowait = true, desc = "Terminal decrease window width" })
 
 --------------------------------------------------------------------------------
 -- Plugin Mappings
