@@ -72,7 +72,7 @@ Stow symlinks everything from this repo into `$HOME`. File paths here mirror the
 
 ## Git Conventions
 
-- Before committing, review the recent commit history using an optimized command (e.g., `git log -n 5 --format="---%n%B"`) to ensure consistency with the established tone, phrasing, and level of detail while being token-efficient.
+- When preparing a commit, gather context in a single tool call by chaining independent commands: `git status && git diff && git log -n 5 --format="---%n%B"`. This provides working tree status, staged/unstaged changes, and recent commit history for style consistency — all in one invocation.
 - Follow the "commit title and description" style:
   - The first line should be a concise summary (the "title") in present simple tense (e.g., "Fix cursor offset" not "Fixed cursor offset").
   - Use a blank line between the title and the body.
