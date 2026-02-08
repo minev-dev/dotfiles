@@ -1,2 +1,3 @@
 gui:
   mainPanelSplitMode: 'horizontal'
+  showStagingPanel: 'on-demand'
