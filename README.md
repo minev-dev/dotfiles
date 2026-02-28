@@ -4,7 +4,7 @@
 
 ### Install GNU Stow
 
-**MacOS**
+**macOS**
 
 ```bash
 brew install stow
@@ -15,6 +15,30 @@ brew install stow
 ```bash
 sudo apt install stow
 ```
+
+### Install core tools
+
+Install `tmux`, `neovim`, and `lazygit` before running setup.
+
+**macOS**
+
+```bash
+brew install tmux neovim lazygit
+```
+
+**Ubuntu / Debian**
+
+```bash
+sudo apt update
+sudo apt install -y tmux neovim lazygit
+```
+
+If `lazygit` is unavailable in your distro repositories, use the official install guide below.
+
+More info (official docs):
+- tmux: https://github.com/tmux/tmux/wiki
+- Neovim: https://neovim.io/doc/user/install.html
+- lazygit: https://github.com/jesseduffield/lazygit?tab=readme-ov-file#installation
 
 ### Setup
 
