@@ -40,6 +40,20 @@ More info (official docs):
 - Neovim: https://neovim.io/doc/user/install.html
 - lazygit: https://github.com/jesseduffield/lazygit?tab=readme-ov-file#installation
 
+### Install `uv`
+
+Install `uv` (official docs): https://docs.astral.sh/uv/getting-started/installation/
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+### Install `pre-commit`
+
+```bash
+uv tool install pre-commit
+```
+
 ### Setup
 
 ```bash
