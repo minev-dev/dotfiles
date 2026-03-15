@@ -48,6 +48,12 @@ More info (official docs):
 - Neovim: https://neovim.io/doc/user/install.html
 - lazygit: https://github.com/jesseduffield/lazygit?tab=readme-ov-file#installation
 
+### Install `Rust`
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
 ### Install `uv`
 
 Install `uv` (official docs): https://docs.astral.sh/uv/getting-started/installation/
