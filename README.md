@@ -16,6 +16,14 @@ brew install stow
 sudo apt install stow
 ```
 
+### Setup
+
+```bash
+git clone https://github.com/minev-dev/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+stow .
+```
+
 ### Install core tools
 
 **macOS**
@@ -54,12 +62,11 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 uv tool install pre-commit
 ```
 
-### Setup
+### Install AI agents
 
 ```bash
-git clone https://github.com/minev-dev/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-stow .
+brew install codex gemini-cli
+curl -fsSL https://claude.ai/install.sh | bash
 ```
 
 ### Linux-specific
