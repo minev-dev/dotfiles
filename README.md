@@ -18,19 +18,19 @@ sudo apt install stow
 
 ### Install core tools
 
-Install `tmux`, `neovim`, and `lazygit` before running setup.
-
 **macOS**
 
 ```bash
-brew install tmux neovim lazygit
+brew install tmux neovim lazygit starship gh glab
 ```
 
 **Ubuntu / Debian**
 
 ```bash
+curl -sSL "https://raw.githubusercontent.com/upciti/wakemeops/main/assets/install_repository" | sudo bash
+
 sudo apt update
-sudo apt install -y tmux neovim lazygit
+sudo apt install -y tmux neovim lazygit starship gh glab
 ```
 
 If `lazygit` is unavailable in your distro repositories, use the official install guide below.
