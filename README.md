@@ -1,5 +1,9 @@
 # My dotfiles
 
+## Overview
+
+This repository stores personal macOS and Linux dotfiles and is managed with GNU Stow.
+
 ## Installation
 
 ### Install GNU Stow
@@ -22,6 +26,14 @@ sudo apt install stow
 git clone https://github.com/minev-dev/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 stow .
+```
+
+To stow only specific groups while keeping others untouched:
+
+```bash
+stow nvim
+stow tmux
+stow ghostty
 ```
 
 ### Install core tools
@@ -68,6 +80,11 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 uv tool install pre-commit
 ```
 
+Commonly used optional tools:
+- [fd](https://github.com/sharkdp/fd)
+- [fzf](https://github.com/junegunn/fzf)
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+
 ### Install AI agents
 
 ```bash
@@ -75,19 +92,19 @@ brew install codex gemini-cli
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
-### Linux-specific
+## Linux-specific
 
-#### `keyd`
+### `keyd`
 
-Remapping linux key binging to mirrot MacOS
+Remap the left Alt key to behave like macOS Command on Linux.
 
-##### Link config to `/etc/keyd`
+#### Link config to `/etc/keyd`
 
 ```bash
 sudo ln -s ~/dotfiles/.config/keyd /etc/keyd
 ```
 
-##### Install and enable `keyd`
+#### Install and enable `keyd`
 
 ```
 sudo apt install keyd
@@ -108,5 +125,5 @@ More info - https://github.com/rvaiya/keyd
 
 #### Install additional binaries
 
-- [ripgrep](https://github.com/BurntSushi/ripgrep)
-- [fd](https://github.com/sharkdp/fd)
+- [xsel](https://github.com/kfish/xsel) (clipboard fallback when needed)
+- [git](https://git-scm.com/)
