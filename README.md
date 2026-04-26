@@ -1,11 +1,6 @@
 # My dotfiles
 
-Hello world.
-
 hi
-
-hello world
-
 hi
 
 ## Installation
