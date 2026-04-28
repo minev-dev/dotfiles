@@ -1,5 +1,7 @@
 # My dotfiles
 
+test
+
 ## Installation
 
 ### Install GNU Stow
