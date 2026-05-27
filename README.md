@@ -1,5 +1,7 @@
 # My dotfiles
 
+A personal dotfiles repository managed with [GNU Stow](https://www.gnu.org/software/stow/), targeting both **Linux** and **macOS** environments.
+
 ## Installation
 
 ### Install GNU Stow
@@ -110,6 +112,8 @@ More info - https://github.com/rvaiya/keyd
 
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
 - [fd](https://github.com/sharkdp/fd)
+
+hello world
 
 hello world
 
