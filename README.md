@@ -1,6 +1,8 @@
 # My dotfiles
 
 Hello world
+hello wrold
+hello wrold
 
 ## Installation
 
