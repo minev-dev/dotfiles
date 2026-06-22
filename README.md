@@ -1,8 +1,5 @@
 # My dotfiles
 
-Hello world
-Hello world
-
 ## Installation
 
 ### Install GNU Stow
