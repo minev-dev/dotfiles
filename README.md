@@ -1,4 +1,5 @@
 # My dotfiles
+A curated personal dotfiles repository managed with GNU Stow for macOS and Linux.
 
 ## Installation
 
@@ -79,7 +80,7 @@ curl -fsSL https://claude.ai/install.sh | bash
 
 #### `keyd`
 
-Remapping linux key binging to mirrot MacOS
+Remapping Linux key mappings to mirror macOS.
 
 ##### Link config to `/etc/keyd`
 
