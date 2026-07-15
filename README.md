@@ -1,26 +1,13 @@
 # My dotfiles
 
+Hello world
+
 ## Installation
-
-### Install GNU Stow
-
-**macOS**
-
-```bash
-brew install stow
-```
-
-**Ubuntu / Debian**
-
-```bash
-sudo apt install stow
-```
 
 ### Setup
 
 ```bash
 git clone https://github.com/minev-dev/dotfiles.git ~/dotfiles
-cd ~/dotfiles
 stow .
 ```
 
