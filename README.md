@@ -1,14 +1,5 @@
 # My dotfiles
 
-hello world
-
-## Hello world records
-
-- 1) Hello world from the terminal.
-- 2) Hello world from tmux.
-- 3) Hello worldworld from Git.
-- 4) Hello worldworld from automation.
-
 ## Installation
 
 ### Install GNU Stow
