@@ -9,6 +9,10 @@ hello world
 - 3) Hello worldworld from Git.
 - 4) Hello worldworld from automation.
 - 5) Hello world from the README update.
+- 8) Hello world from line 7.
+- 7) Hello world from line 7.
+- 8) Hello world from line 8.
+- 9) Hello world from line 9.
 ## Installation
 
 ### Install GNU Stow
