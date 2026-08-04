@@ -1,10 +1,12 @@
+local nvim_tree_opts = {
+  filters = {
+    git_ignored = false,
+  },
+}
+
 return {
   {
     "nvim-tree/nvim-tree.lua",
-    opts = {
-      filters = {
-        git_ignored = false,
-      },
-    },
+    opts = nvim_tree_opts,
   },
 }
