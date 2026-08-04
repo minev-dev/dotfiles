@@ -1,7 +1,9 @@
 require "nvchad.options"
 
--- add yours here!
+--------------------------------------------------------------------------------
+-- Editing behavior
+--------------------------------------------------------------------------------
 
 -- Force use of internal registers for clipboard operations.
--- We handle system clipboard copying via TextYankPost autocmd in mappings.lua.
+-- OSC52 handles system clipboard copying via TextYankPost in mappings.lua.
 vim.o.clipboard = ""
