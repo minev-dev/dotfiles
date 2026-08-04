@@ -1,6 +1,6 @@
-require("nvchad.configs.lspconfig").defaults()
+local M = {}
 
-local servers = {
+M.servers = {
   "html",
   "cssls",
   "pyright",
@@ -8,4 +8,15 @@ local servers = {
   "terraformls",
 }
 
-vim.lsp.enable(servers)
+local function apply_core_defaults()
+  require("nvchad.configs.lspconfig").defaults()
+end
+
+function M.setup()
+  apply_core_defaults()
+  vim.lsp.enable(M.servers)
+end
+
+M.setup()
+
+return M
