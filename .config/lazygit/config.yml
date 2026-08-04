@@ -1,6 +1,10 @@
+# Terminal key intent:
+# Keep lazygit vertical movement aligned with the terminal stack convention
+# (ctrl-k / ctrl-j) used for quick-up/down workflow navigation.
 gui:
-  mainPanelSplitMode: 'horizontal'
+  mainPanelSplitMode: horizontal
+  # Keep horizontal split as the base layout in terminal usage.
 keybinding:
   universal:
-    scrollUpMain: '<c-k>'
-    scrollDownMain: '<c-j>'
+    scrollUpMain: "<c-k>"
+    scrollDownMain: "<c-j>"
