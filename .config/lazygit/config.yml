@@ -6,5 +6,6 @@ gui:
   # Keep horizontal split as the base layout in terminal usage.
 keybinding:
   universal:
+    # Keep movement aligned with tmux/copy-mode and editor workflows.
     scrollUpMain: "<c-k>"
     scrollDownMain: "<c-j>"

@@ -7,15 +7,17 @@ vim.g.base46_cache = data_dir .. "/base46/"
 vim.g.mapleader = " "
 
 local lazy_path = data_dir .. "/lazy/lazy.nvim"
+local lazy_repo = "https://github.com/folke/lazy.nvim.git"
 
-local function ensure_lazy_installed(path)
-  if not vim.uv.fs_stat(path) then
-    local repo = "https://github.com/folke/lazy.nvim.git"
-    vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", path }
+local function ensure_lazy_installed()
+  if vim.uv.fs_stat(lazy_path) then
+    return
   end
+
+  vim.fn.system { "git", "clone", "--filter=blob:none", lazy_repo, "--branch=stable", lazy_path }
 end
 
-ensure_lazy_installed(lazy_path)
+ensure_lazy_installed()
 vim.opt.rtp:prepend(lazy_path)
 
 --------------------------------------------------------------------------------
@@ -78,10 +80,7 @@ require("cmp").setup {
 vim.api.nvim_create_autocmd("VimEnter", {
   pattern = "*",
   callback = function()
-    -- Check if NvimTree is available before trying to open it.
-    local nvimtree_status, _ = pcall(require, "nvim-tree.api")
-    if nvimtree_status then
-      -- Use a small delay to ensure the UI is ready.
+    if pcall(require, "nvim-tree.api") then
       vim.defer_fn(function()
         vim.cmd "NvimTreeOpen"
       end, 10)

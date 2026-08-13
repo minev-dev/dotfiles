@@ -1,6 +1,6 @@
 local M = {}
 
-M.servers = {
+local servers = {
   "html",
   "cssls",
   "pyright",
@@ -14,7 +14,7 @@ end
 
 function M.setup()
   apply_core_defaults()
-  vim.lsp.enable(M.servers)
+  vim.lsp.enable(servers)
 end
 
 M.setup()
