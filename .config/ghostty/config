@@ -5,33 +5,33 @@ clipboard-write = allow
 
 confirm-close-surface = false
 
-# --- CROSS-PLATFORM MACOS/LINUX SETUP ---
+# ---- Terminal stack intent ----
+# Cross-platform key intent is mirrored across terminal + multiplexer + lazygit:
+# - macOS: Super-based shortcuts
+# - Linux: Ctrl-based shortcuts (or keyd remap equivalents)
+# Keep these bindings consistent with ~/.tmux.conf and ~/.config/lazygit/config.yml.
 
-# 1. NEW TAB
+# TAB / WINDOW LIFECYCLE
 keybind = super+t=new_tab
 keybind = ctrl+t=new_tab
-
-# 2. CLOSE TAB
 keybind = super+w=close_tab
 keybind = ctrl+f4=close_tab
 
-# 3. COPY
+# CLIPBOARD (OSC52 path)
+# Terminal clipboard is enabled above; tmux preserves passthrough behavior.
 keybind = super+c=copy_to_clipboard
 keybind = ctrl+insert=copy_to_clipboard
-
-# 4. PASTE
 keybind = super+v=paste_from_clipboard
 keybind = shift+insert=paste_from_clipboard
+keybind = ctrl+v=paste_from_clipboard
 
-# 5. TAB SWITCHING
+# TAB NAVIGATION
 keybind = super+1=goto_tab:1
 keybind = super+2=goto_tab:2
 keybind = super+3=goto_tab:3
 keybind = super+4=goto_tab:4
 keybind = super+5=goto_tab:5
 keybind = super+6=goto_tab:6
-
-# Linux: Thumb+1..9 sends Ctrl+1..9 via keyd
 keybind = ctrl+1=goto_tab:1
 keybind = ctrl+2=goto_tab:2
 keybind = ctrl+3=goto_tab:3
@@ -39,6 +39,9 @@ keybind = ctrl+4=goto_tab:4
 keybind = ctrl+5=goto_tab:5
 keybind = ctrl+6=goto_tab:6
 
-# 6. MULTILINE INPUT (Fix for Shift+Enter in CLI apps)
-keybind = shift+enter=text:\x0a
+# Linux keyd note:
+#   thumb layer often remaps alt/meta chords to ctrl+1..ctrl+9 for 1-key tab parity.
 
+# INPUT FIX
+# Preserve multiline submit behavior in shells/REPLs where Shift+Enter is needed.
+keybind = shift+enter=text:\x0a

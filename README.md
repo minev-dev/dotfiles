@@ -1,17 +1,21 @@
 # My dotfiles
 
-hello world
+Repository layout and onboarding guidance for terminal workflows (shell, tmux, Neovim, and keyd).
 
-## Hello world records
+## Module map
 
-- 1) Hello world from the terminal.
-- 2) Hello world from tmux.
-- 3) Hello worldworld from Git.
-- 4) Hello worldworld from automation.
-- 5) Hello world from the README update.
-## Installation
+- **Neovim**: `.config/nvim/`
+  - NvChad-based configuration, plugin setup, and language tooling.
+- **Ghostty**: `.config/ghostty/config`
+  - Terminal defaults and keybinding parity.
+- **tmux**: `.tmux.conf`
+  - Session behavior, copy-mode preferences, OSC52 clipboard behavior, and UX shortcuts.
+- **lazygit**: `.config/lazygit/config.yml`
+  - Git terminal UI settings and keymaps.
+- **keyd (Linux)**: `.config/keyd/default.conf`
+  - Remaps Linux modifier keys to macOS-style behavior for shell/tmux workflows.
 
-### Install GNU Stow
+## Install GNU Stow
 
 **macOS**
 
@@ -25,7 +29,7 @@ brew install stow
 sudo apt install stow
 ```
 
-### Setup
+## Setup
 
 ```bash
 git clone https://github.com/minev-dev/dotfiles.git ~/dotfiles
@@ -33,7 +37,9 @@ cd ~/dotfiles
 stow .
 ```
 
-### Install core tools
+`stow .` deploys the files and symlinks configuration for any managed module.
+
+## Install core tools
 
 **macOS**
 
@@ -77,28 +83,26 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 uv tool install pre-commit
 ```
 
-### Install AI agents
+## AI agent tooling (optional)
 
 ```bash
 brew install codex gemini-cli
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
-### Linux-specific
+## Linux-specific setup: keyd
 
-#### `keyd`
+Remapping Linux key behavior to mirror macOS for shell/tmux flow.
 
-Remapping linux key binging to mirrot MacOS
-
-##### Link config to `/etc/keyd`
+### Link config to `/etc/keyd`
 
 ```bash
 sudo ln -s ~/dotfiles/.config/keyd /etc/keyd
 ```
 
-##### Install and enable `keyd`
+### Install and enable `keyd`
 
-```
+```bash
 sudo apt install keyd
 sudo systemctl enable keyd --now
 ```
@@ -107,11 +111,11 @@ More info - https://github.com/rvaiya/keyd
 
 ## Post-installation
 
-### Nvim
+### Neovim
 
 #### Install all LSP servers
 
-```
+```vim
 :MasonInstallAll
 ```
 
@@ -119,3 +123,35 @@ More info - https://github.com/rvaiya/keyd
 
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
 - [fd](https://github.com/sharkdp/fd)
+
+## Shell onboarding and maintenance checklist
+
+- Restart or reopen your shell after stowing so terminal apps read symlinks.
+- Verify module files exist in expected locations (`ls .config/nvim .config/ghostty .config/keyd .config/lazygit`).
+- Use `git pull` then `stow .` after updates to refresh installed symlinks.
+- Keep behavior changes scoped to:
+  - `.tmux.conf`
+  - `.config/ghostty/config`
+  - `.config/keyd/default.conf`
+  - `.config/nvim/init.lua`
+  - `.config/nvim/lua/`
+  - `.config/lazygit/config.yml`
+- Run formatting/linting from each module’s toolchain only when you edit behavior files.
+
+## Planned refactor touch list
+
+- `.tmux.conf`
+- `.config/ghostty/config`
+- `.config/keyd/default.conf`
+- `.config/lazygit/config.yml`
+- `.config/nvim/README.md`
+- `.config/nvim/init.lua`
+- `.config/nvim/lua/*`
+
+## Post-refactor validation checklist
+
+- [ ] macOS: verify tmux startup, Neovim plugin load, and Ghostty launch after running `stow .`.
+- [ ] macOS: confirm paste/OSC52 behavior in tmux and Neovim sessions.
+- [ ] Linux: verify `/etc/keyd` symlink and `systemctl status keyd` are healthy.
+- [ ] Linux: validate shell/tmux keybinding parity and fallback behavior when running SSH.
+- [ ] All: check `lazygit` opens and uses the repo config with no unknown merge markers.

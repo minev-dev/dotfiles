@@ -1,19 +1,31 @@
-vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
+--------------------------------------------------------------------------------
+-- Global bootstrap
+--------------------------------------------------------------------------------
+
+local data_dir = vim.fn.stdpath "data"
+vim.g.base46_cache = data_dir .. "/base46/"
 vim.g.mapleader = " "
 
--- bootstrap lazy and all plugins
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+local lazy_path = data_dir .. "/lazy/lazy.nvim"
+local lazy_repo = "https://github.com/folke/lazy.nvim.git"
 
-if not vim.uv.fs_stat(lazypath) then
-  local repo = "https://github.com/folke/lazy.nvim.git"
-  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
+local function ensure_lazy_installed()
+  if vim.uv.fs_stat(lazy_path) then
+    return
+  end
+
+  vim.fn.system { "git", "clone", "--filter=blob:none", lazy_repo, "--branch=stable", lazy_path }
 end
 
-vim.opt.rtp:prepend(lazypath)
+ensure_lazy_installed()
+vim.opt.rtp:prepend(lazy_path)
+
+--------------------------------------------------------------------------------
+-- Plugin runtime
+--------------------------------------------------------------------------------
 
 local lazy_config = require "configs.lazy"
 
--- load plugins
 require("lazy").setup({
   {
     "NvChad/NvChad",
@@ -21,13 +33,23 @@ require("lazy").setup({
     branch = "v2.5",
     import = "nvchad.plugins",
   },
-
   { import = "plugins" },
 }, lazy_config)
 
--- load theme
-dofile(vim.g.base46_cache .. "defaults")
-dofile(vim.g.base46_cache .. "statusline")
+--------------------------------------------------------------------------------
+-- Core UI defaults
+--------------------------------------------------------------------------------
+
+local function load_core_ui()
+  dofile(vim.g.base46_cache .. "defaults")
+  dofile(vim.g.base46_cache .. "statusline")
+end
+
+load_core_ui()
+
+--------------------------------------------------------------------------------
+-- Configuration modules
+--------------------------------------------------------------------------------
 
 require "options"
 require "nvchad.autocmds"
@@ -36,7 +58,10 @@ vim.schedule(function()
   require "mappings"
 end)
 
--- Disable nvim_lsp.CompletionItemKind.Text
+--------------------------------------------------------------------------------
+-- Completion filtering
+--------------------------------------------------------------------------------
+
 require("cmp").setup {
   sources = {
     {
@@ -48,18 +73,18 @@ require("cmp").setup {
   },
 }
 
+--------------------------------------------------------------------------------
+-- Startup behavior
+--------------------------------------------------------------------------------
+
 vim.api.nvim_create_autocmd("VimEnter", {
-  pattern = "*", -- Match all events
+  pattern = "*",
   callback = function()
-    -- Check if NvimTree is available before trying to open it
-    local nvimtree_status, _ = pcall(require, "nvim-tree.api")
-    if nvimtree_status then
-      -- Use a small delay to ensure the UI is ready
+    if pcall(require, "nvim-tree.api") then
       vim.defer_fn(function()
         vim.cmd "NvimTreeOpen"
-      end, 10) -- 10ms delay, adjust if needed
+      end, 10)
     end
   end,
   desc = "Auto open NvimTree on startup",
 })
-

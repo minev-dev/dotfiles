@@ -1,73 +1,113 @@
 local map = vim.keymap.set
+local osc52 = require "osc52"
 
 require "nvchad.mappings"
 
+local function map_opts(overrides)
+  return vim.tbl_extend("force", {
+    noremap = true,
+    silent = true,
+    nowait = true,
+  }, overrides or {})
+end
+
+local function register_group(mode, mappings)
+  for _, mapping in ipairs(mappings) do
+    map(mode, mapping.lhs, mapping.rhs, map_opts { desc = mapping.desc })
+  end
+end
+
+local function setup_osc52_yank_autocmd()
+  vim.api.nvim_create_autocmd("TextYankPost", {
+    pattern = "*",
+    callback = function()
+      if vim.v.event.operator == "y" and vim.v.event.regname == "" then
+        osc52.copy_register ""
+      end
+    end,
+  })
+end
+
+local function nvim_tree_opener(action_name)
+  return function()
+    local ok, tree_api = pcall(require, "nvim-tree.api")
+    if not ok then
+      return
+    end
+
+    local action = tree_api.node.open[action_name]
+    if action then
+      action()
+    end
+  end
+end
+
+setup_osc52_yank_autocmd()
+
 --------------------------------------------------------------------------------
--- General Settings
+-- Editing behavior
 --------------------------------------------------------------------------------
 
--- Automatically copy to system clipboard on yank
-vim.api.nvim_create_autocmd("TextYankPost", {
-  pattern = "*",
-  callback = function()
-    if vim.v.event.operator == "y" and vim.v.event.regname == "" then
-      require("osc52").copy_register("")
-    end
-  end,
+register_group("n", {
+  { lhs = ";", rhs = ":", desc = "CMD enter command mode" },
 })
 
 --------------------------------------------------------------------------------
--- General Mappings
---------------------------------------------------------------------------------
-
--- Enter command mode with ;
-map("n", ";", ":", { desc = "CMD enter command mode" })
-
 -- Window resizing
-map("n", "<C-w>+", "<cmd>resize +10<CR>", { noremap = true, silent = true, nowait = true, desc = "Increase window height" })
-map("n", "<C-w>-", "<cmd>resize -10<CR>", { noremap = true, silent = true, nowait = true, desc = "Decrease window height" })
-map("n", "<C-w>>", "<cmd>vertical resize +10<CR>", { noremap = true, silent = true, nowait = true, desc = "Increase window width" })
-map("n", "<C-w><", "<cmd>vertical resize -10<CR>", { noremap = true, silent = true, nowait = true, desc = "Decrease window width" })
-
-map("t", "<C-w>+", "<cmd>resize +10<CR>", { noremap = true, silent = true, nowait = true, desc = "Terminal increase window height" })
-map("t", "<C-w>-", "<cmd>resize -10<CR>", { noremap = true, silent = true, nowait = true, desc = "Terminal decrease window height" })
-map("t", "<C-w>>", "<cmd>vertical resize +10<CR>", { noremap = true, silent = true, nowait = true, desc = "Terminal increase window width" })
-map("t", "<C-w><", "<cmd>vertical resize -10<CR>", { noremap = true, silent = true, nowait = true, desc = "Terminal decrease window width" })
-
---------------------------------------------------------------------------------
--- Plugin Mappings
 --------------------------------------------------------------------------------
 
--- Telescope / LSP
-map(
-  "n",
-  "grr",
-  ':lua require("telescope.builtin").lsp_references()<CR>',
-  { noremap = true, silent = true, desc = "Show references" }
-)
-map("n", "ga", ":lua vim.lsp.buf.code_action()<CR>", { noremap = true, silent = true, desc = "Code action" })
+register_group({ "n", "t" }, {
+  { lhs = "<C-w>+", rhs = "<cmd>resize +10<CR>", desc = "Increase window height" },
+  { lhs = "<C-w>-", rhs = "<cmd>resize -10<CR>", desc = "Decrease window height" },
+  { lhs = "<C-w>>", rhs = "<cmd>vertical resize +10<CR>", desc = "Increase window width" },
+  { lhs = "<C-w><", rhs = "<cmd>vertical resize -10<CR>", desc = "Decrease window width" },
+})
 
--- Clipboard (OSC52)
-map("n", "<leader>y", require("osc52").copy_operator, { expr = true, desc = "Copy operator" })
-map("v", "<leader>y", require("osc52").copy_visual, { desc = "Copy visual" })
+--------------------------------------------------------------------------------
+-- File tree open helpers
+--------------------------------------------------------------------------------
 
--- NvimTree
-local function nvim_tree_opts(desc)
-  return { desc = "nvim-tree: " .. desc, noremap = true, silent = true, nowait = true }
-end
+register_group("n", {
+  { lhs = "<C-v>", rhs = nvim_tree_opener "vertical", desc = "nvim-tree: Open: Vertical Split" },
+  { lhs = "<C-x>", rhs = nvim_tree_opener "horizontal", desc = "nvim-tree: Open: Horizontal Split" },
+})
 
-map("n", "<C-v>", require("nvim-tree.api").node.open.vertical, nvim_tree_opts "Open: Vertical Split")
-map("n", "<C-x>", require("nvim-tree.api").node.open.horizontal, nvim_tree_opts "Open: Horizontal Split")
+--------------------------------------------------------------------------------
+-- LSP and coding tools
+--------------------------------------------------------------------------------
 
--- Terminal
-local term_toggle = require("nvchad.term").toggle
+register_group("n", {
+  {
+    lhs = "grr",
+    rhs = function()
+      require("telescope.builtin").lsp_references()
+    end,
+    desc = "Show references",
+  },
+  { lhs = "ga", rhs = function() vim.lsp.buf.code_action() end, desc = "Code action" },
+})
 
-map("t", "<Esc>", "<C-\\><C-N>", { desc = "Enter Terminal Normal Mode" })
+--------------------------------------------------------------------------------
+-- Clipboard / terminal UX
+--------------------------------------------------------------------------------
 
-map({ "n", "t" }, "<leader>tv", function()
-  term_toggle { pos = "vsp", id = "custom_vertical_term", size = 0.4 }
-end, { noremap = true, silent = true, desc = "Toggle vertical terminal" })
+map("n", "<leader>y", osc52.copy_operator, map_opts { expr = true, desc = "Copy operator" })
+map("v", "<leader>y", osc52.copy_visual, map_opts { desc = "Copy visual" })
+map("t", "<Esc>", "<C-\\><C-N>", map_opts { desc = "Enter Terminal Normal Mode" })
 
-map("n", "<leader>th", function()
-  term_toggle { pos = "sp", id = "custom_horizontal_term", size = 0.3 }
-end, { noremap = true, silent = true, desc = "Toggle horizontal terminal" })
+register_group({ "n", "t" }, {
+  {
+    lhs = "<leader>tv",
+    rhs = function()
+      require("nvchad.term").toggle { pos = "vsp", id = "custom_vertical_term", size = 0.4 }
+    end,
+    desc = "Toggle vertical terminal",
+  },
+  {
+    lhs = "<leader>th",
+    rhs = function()
+      require("nvchad.term").toggle { pos = "sp", id = "custom_horizontal_term", size = 0.3 }
+    end,
+    desc = "Toggle horizontal terminal",
+  },
+})
